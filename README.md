@@ -24,6 +24,9 @@ Some things I'm going to stick to pretty closely. Here they are:
 + Websockets are used for pushing data to the browser - no long-polling, etc.
 + Does not provide data that's easily misunderstood
 
+***Prerequisites
+Make sure TCP 9000, 4321 (HBLink Reporting port is opened) for this to work.
+
 ***0x49 DE N0MJS***
 
 Copyright (C) 2013-2018  Cortney T. Buffington, N0MJS <n0mjs@me.com>
