@@ -1,30 +1,87 @@
+
+
+**HBMonitor no longer developing**
+
+**Try to use more updated version by OA4DOA: https://github.com/yuvelq/FDMR-Monitor**
+
+
+**HBmonitor is a "web dashboard" for HBlink by N0MJS.**
+
+**New version of HBMonitor V2 (2021):**
+
+https://github.com/sp2ong/HBMonv2
+
+
+***This is version of HBMonitor V1 by SP2ONG 2019-2021***
+
+I recommend not running HBmonitor on the same computer as HBlink3
+
+HBmonitor tested on Debian v9 STRETCH
+
+HBMonitor V1:
+    cd /opt
+    git clone https://github.com/sp2ong/HBmonitor.git
+    cd HBmonitor
+    
+    If you want to try the HBMonitor version with BRIDGE status display on a separate page, 
+    run the command below, if not skip this command:
+    git checkout bridges
+    
+    chmod +x install.sh
+    ./install.sh
+    cp config-SAMPLE.py config.py
+    edit config.py and change what you necessary
+    cp utils/hbmon.service /lib/systemd/system/
+    systemctl enable hbmon
+    systemctl start hbmon
+    systemctl status hbmon
+    forward TCP ports 8080 and 9000 in firewall
+    
+    If you use openbrige links, in config.py in OPB_FILTER enter NETWORK_ID 
+    to do not display unnecessary entries in LASTHEARD.
+    
+    Please remember the table lastherad displays only station transmissions that are longer than 2 seconds.
+    
+    If you don't want to have the lasherad list set in config.py :  
+      LASTHEARD_INC = False
+    
+    If you want to have more than the last 10 entries in the Lastherad table
+    change in the monitor.py file on line 629 https://github.com/sp2ong/HBmonitor/blob/master/monitor.py#L629
+      if n == 10:
+    for example:
+      if n == 20:
+
+    If you want to have access to HBmonitor via username and password, set it in config.py :
+      WEB_AUTH =  True
+    and set username and password in:    
+      WEB_USER =  'hblink'
+      WEB_PASS =  'hblink'
+
+    If not need monitor online rules please use in config.py BRIDGES_INC = False
+
 ---
-### COMPLETELY UNSUPPORTED SOFTWARE - DO NOT ASK FOR SUPPORT OR FEATURES ###
+
+After update distribution of Linux jinja2 to version 3.x you can find problem with run HBMonitor with error:
+
+     ValueError: The 'monitor' package was not installed in a way that PackageLoader understands.
+
+
+You must uninstall jinja2 and reinstalling with this version Jinja2==2.11.3
+
+    pip3 uninstall jinja2
+
+and
+
+    pip3 install Jinja2==2.11.3
+
+
 ---
 
-**Socket-Based Reporting for HBlink**
+**hbmonitor3 by KC1AWV**
 
-Over the years, the biggest request recevied for HBlink (other than call-routing/bridging tools) has been web-based diagnostics and/or statistics for the program.
+Python 3 implementation of N0MJS HBmonitor for HBlink https://github.com/kc1awv/hbmonitor3 
 
-I strongly disagree with including the amount of overhead this would require inside HBlink -- which still runs nicely on very modest resources. That it does this, and is in Python is a point of pride for me... Just let me have this one, ok? What I have done is added some hooks to HBlink, which will be expanded over time, whereby it listens on a TCP socket and provides the raw data necessary for a "web dashboard", or really any external logging or statistics gathering program.
-
-HBmonitor is my take on a "web dashboard" for HBlink.
-
-***THIS SOFTWARE IS VERY, VERY NEW***
-
-Right now, I'm just getting into how this should work, what does work well, what does not... and I am NOT a web applications programmer, so yeah, that javascript stuff is gonna look bad. Know what you're doing? Help me!
-
-It has now reached a point where folks who know what they're doing can probably make it work reasonably well, so I'm opening up the project to the public.
-
-***GOALS OF THE PROJECT***
-
-Some things I'm going to stick to pretty closely. Here they are:
-
-+ HBmonitor be one process that includes a webserver
-+ Websockets are used for pushing data to the browser - no long-polling, etc.
-+ Does not provide data that's easily misunderstood
-
-***0x49 DE N0MJS***
+---
 
 Copyright (C) 2013-2018  Cortney T. Buffington, N0MJS <n0mjs@me.com>
 
@@ -33,3 +90,10 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+
+
+
+
+
+
+
